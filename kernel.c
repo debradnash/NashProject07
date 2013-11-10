@@ -8,6 +8,8 @@
    */
 
 void printString();
+void readString();
+void readSector();
 
 int main()
 {
