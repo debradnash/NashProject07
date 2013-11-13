@@ -37,7 +37,12 @@ void readString(char* myLine) {
   interrupt(0x10, 0xE*256 + mychar, 0, 0, 0);
   myLine[idx]=mychar;
   ++idx;
-
+if (mychar == 0x8) {
+    if (idx > 0)
+       --idx;
+    else
+     continue;
+  }
  }
  myLine[idx+1] = '\r';
  myLine[idx+2] = '\n';
