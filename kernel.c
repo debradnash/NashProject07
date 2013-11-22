@@ -31,14 +31,14 @@ int main(){
       
      printString("\n");
      printString(myLine);
-*/
+
      readSector(abuffer, 30);  
      printString(abuffer);
-
-/* Step 4 
+*/
+/* Step 4 */
     makeInterrupt21();   
     interrupt(0x21,0,0,0,0);   
-*/
+
  while (1);
       return 0;
 }
