@@ -32,9 +32,9 @@ int main(){
      printString(myLine);
 */
 
-     readSector(abuffer, sector);  
+     readSector(abuffer, 30);  
      printString(abuffer);
-     printString("\n");	
+  
 
  while (1);
       return 0;
@@ -63,12 +63,9 @@ void readSector(char* abuffer, int sector){
   h = div(sector,18);h = mod(h,2); */
   t = 0;
 /*  t = div(sector, 36); Manually calculated variables for test*/
+    interrupt(0x13, 2*256+1, abuffer, t*256+rs, h*256+0);
   
-  mychar = abuffer[idx];
-  while (mychar != '\0') {
-    interrupt(0x13, 2*256+1, mychar, t*256+rs, h*256+0);
-    mychar = abuffer[++idx];
-  } 
+
 }
 void readString(char* myLine) {
  int idx = 0;
