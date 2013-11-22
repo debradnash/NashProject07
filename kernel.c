@@ -10,12 +10,13 @@
    */
 
 
-
+void handleInterrupt21();
 int mod();
 int div();
 void printString();
 void readString();
 void readSector();
+
 
 char myLine[80] = 0;
 char abuffer[512] = 0;
@@ -31,11 +32,13 @@ int main(){
      printString("\n");
      printString(myLine);
 */
-
      readSector(abuffer, 30);  
      printString(abuffer);
-  
 
+/* Step 4 
+    makeInterrupt21();   
+    interrupt(0x21,0,0,0,0);   
+*/
  while (1);
       return 0;
 }
@@ -56,17 +59,15 @@ void readSector(char* abuffer, int sector){
   int idx = 0;
   char mychar;
   
-  /* rs = mod(sector,18)+ 1;*/
-  rs = 13;
-  h = 1;
-/*
-  h = div(sector,18);h = mod(h,2); */
-  t = 0;
-/*  t = div(sector, 36); Manually calculated variables for test*/
-    interrupt(0x13, 2*256+1, abuffer, t*256+rs, h*256+0);
-  
-
+  rs = mod(sector,18)+ 1;
+  h = div(sector,18);h = mod(h,2); 
+  t = div(sector, 36); 
+  interrupt(0x13, 2*256+1, abuffer, t*256+rs, h*256+0);
 }
+void handleInterrupt21(int ax, int bx, int cx, int dx){
+         printString("Hello Debra's World \0");
+}
+  
 void readString(char* myLine) {
  int idx = 0;
  char mychar =  0;
